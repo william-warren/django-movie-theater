@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Buy a ticket for {{ movie.title }}</h1>
+<form action="{% url 'new_ticket' movie.id %}" method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="showing_id">Showtime</label>
+        <select name="showing_id" id="showing_id" class="form-control" required>
+            {% for showing in movie.showing_set.all %}
+            <option value="{{ showing.id }}">{{ showing.showtime }}</option>
+            {% endfor %}
+        </select>    
+    </div>
+    {{ form.errors }}
+    <button class="btn btn-primary">Buy</button>
+</form>
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock extra_css %}
+{% block content %}
+<h1>Movies</h1>
+<ul>
+{% for movie in movies %}
+<li class="card mb-5">
+    <div class="card-body">
+        <h2 class="card-title">{{ movie.title }}</h2>
+        <dl>
+            <dt>Rating</dt>
+            <dd>{{ movie.rating }}</dd>
+            <dt>Runtime</dt>
+            <dd>{{ movie.runtime }}</dd>
+            <dt>Genre</dt>
+            <dd>{{ movie.genre }}</dd>
+            <dt>Showings</dt>
+            <dd>
+                <ol class="showings">
+                    {% for showing in movie.showing_set.all %}
+                    <li class="showing">
+                        <p class="showing__showtime">{{ showing.showtime }}</p>
+                    </li>
+                    {% endfor %}
+                </ol>
+            </dd>
+            <a href="{% url 'new_ticket' movie.id %}"><button class="btn btn-primary">Buy Ticket</button></a>
+        </dl>
+    </div>
+</li>
+{% endfor %}
+</ul>
+{% endblock content %}

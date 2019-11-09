@@ -11,6 +11,10 @@ requirements. Users must be able to:
 To complete this project you will have to implement the URLs, Views, Models, and
 Forms as described below.
 
+I've added a command to seed the database with data based on the python benchmark
+project. If your models are correct, you can run `python3 manage.py seed_movies`
+to populate your database with those movies.
+
 To check your solution, I've provided a test suite that you can run with
 `python3 manage.py test`.
 
